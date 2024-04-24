@@ -3005,9 +3005,7 @@ class FunkinLua {
 
 		var pee:FlxCamera = PlayState.instance.modchartCameras.get(tag);
 		pee.kill();
-		if(pee.wasAdded) {
-			PlayState.instance.remove(pee, true);
-		}
+		// PlayState.instance.remove(pee, true);
 		pee.destroy();
 		PlayState.instance.modchartCameras.remove(tag);
 	}
