@@ -1713,6 +1713,19 @@ class FunkinLua {
 			}
 		});
 
+		Lua_helper.add_callback(lua, "makeLuaCamera", function(tag:String, x:Float = 0, y:Float = 0, width:Int = 0, height:Int = 0, zoom:Float = 0){
+			tag = tag.replace('.', '');
+			resetCameraTag(tag);
+			var leCam:FlxCamera = new FlxCamera(x, y, width, height, zoom);
+			PlayState.instance.modchartCameras.set(tag, leCam);
+		});
+		Lua_helper.add_callback(lua, "addLuaCamera", function(tag:String, defaultTargetDraw:Bool = false){
+			if (!PlayState.instance.modchartCameras.exists(tag)) {
+				var shit:FlxCamera = PlayState.instance.modchartCameras.get(tag);
+				getInstance().add(shit);
+			}
+		});
+
 		Lua_helper.add_callback(lua, "makeLuaSprite", function(tag:String, image:String, x:Float, y:Float) {
 			tag = tag.replace('.', '');
 			resetSpriteTag(tag);
@@ -2754,6 +2767,10 @@ class FunkinLua {
 			return list;
 		});
 
+		Lua_helper.add_callback(lua, "StdInt", function (x:Float = 0) {
+			return Std.int(X);
+		});
+
 		call('onCreate', []);
 		#end
 	}
@@ -2979,6 +2996,20 @@ class FunkinLua {
 			return;
 		}
 		Reflect.setProperty(leArray, variable, value);
+	}
+
+	function resetCameraTag(tag:String) {
+		if(!PlayState.instance.modchartCameras.exists(tag)) {
+			return;
+		}
+
+		var pee:ModchartText = PlayState.instance.modchartCameras.get(tag);
+		pee.kill();
+		if(pee.wasAdded) {
+			PlayState.instance.remove(pee, true);
+		}
+		pee.destroy();
+		PlayState.instance.modchartCameras.remove(tag);
 	}
 
 	function resetTextTag(tag:String) {
@@ -3404,6 +3435,7 @@ class HScript
 		#end
 		interp.variables.set('ShaderFilter', openfl.filters.ShaderFilter);
 		interp.variables.set('StringTools', StringTools);
+        interp.variables.set("Std", Std);
 
 		interp.variables.set('setVar', function(name:String, value:Dynamic)
 		{
