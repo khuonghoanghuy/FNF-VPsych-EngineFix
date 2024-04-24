@@ -1722,7 +1722,8 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "addLuaCamera", function(tag:String, defaultTargetDraw:Bool = false){
 			if (!PlayState.instance.modchartCameras.exists(tag)) {
 				var shit:FlxCamera = PlayState.instance.modchartCameras.get(tag);
-				getInstance().add(shit);
+				// getInstance().add(shit);
+				FlxG.cameras.add(shit, defaultTargetDraw);
 			}
 		});
 
