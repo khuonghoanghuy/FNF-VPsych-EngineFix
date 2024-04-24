@@ -1713,7 +1713,7 @@ class FunkinLua {
 			}
 		});
 
-		Lua_helper.add_callback(lua, "makeLuaCamera", function(tag:String, x:Float = 0, y:Float = 0, width:Int = 0, height:Int = 0, zoom:Float = 0){
+		Lua_helper.add_callback(lua, "makeLuaCamera", function(tag:String, x:Int = 0, y:Int = 0, width:Int = 0, height:Int = 0, zoom:Float = 0){
 			tag = tag.replace('.', '');
 			resetCameraTag(tag);
 			var leCam:FlxCamera = new FlxCamera(x, y, width, height, zoom);
@@ -3003,7 +3003,7 @@ class FunkinLua {
 			return;
 		}
 
-		var pee:ModchartText = PlayState.instance.modchartCameras.get(tag);
+		var pee:FlxCamera = PlayState.instance.modchartCameras.get(tag);
 		pee.kill();
 		if(pee.wasAdded) {
 			PlayState.instance.remove(pee, true);
