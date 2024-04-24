@@ -29,7 +29,7 @@ same goes for *Lua Scripts*, comment out or delete the line with `LUA_ALLOWED`, 
 1. Download
 * <a href = "https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html"> JDK </a> - download jdk 8
 * <a href = "https://developer.android.com/studio"> Android Studio </a>
-* <a href = "https://developer.android.com/ndk/downloads/older_releases?hl=fi"> NDK </a> - download the r15c
+* <a href = "https://developer.android.com/ndk/downloads/older_releases?hl=fi"> NDK </a> - download the r21e
 
 2. Install JDK, Android Studio 
 Unzip ndk (ndk does not need to be installed)
