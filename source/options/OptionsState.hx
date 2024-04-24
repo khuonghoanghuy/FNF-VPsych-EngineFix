@@ -87,6 +87,8 @@ class OptionsState extends MusicBeatState
 		add(camFollow);
 		add(camFollowPos);
 
+		FlxG.camera.follow(camFollowPos, null, 1);
+
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
 		bg.updateHitbox();
