@@ -193,14 +193,18 @@ class OptionsState extends MusicBeatState
 			bullShit++;
 
 			item.alpha = 0.6;
+			var add:Float = 0;
 			if (item.targetY == 0) {
 				item.alpha = 1;
 				selectorLeft.x = item.x - 63;
 				selectorLeft.y = item.y;
 				selectorRight.x = item.x + item.width + 15;
+				if(item.length > 4) {
+					add = item.length * 8;
+				}
 				selectorRight.y = item.y;
+				camFollow.setPosition(item.x, item.y - add);
 			}
-			camFollow.setPosition(item.x, item.y - bullShit);
 		}
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 	}
