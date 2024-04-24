@@ -30,6 +30,9 @@ using StringTools;
 
 class OptionsState extends MusicBeatState
 {
+	var camFollow:FlxObject;
+	var camFollowPos:FlxObject;
+
 	var options:Array<String> = ['Note Colors', 'Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
@@ -77,6 +80,11 @@ class OptionsState extends MusicBeatState
 		#if desktop
 		DiscordClient.changePresence("Options Menu", null);
 		#end
+
+		camFollow = new FlxObject(0, 0, 1, 1);
+		camFollowPos = new FlxObject(0, 0, 1, 1);
+		add(camFollow);
+		add(camFollowPos);
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
@@ -136,6 +144,9 @@ class OptionsState extends MusicBeatState
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
+		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
+		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
+
 		if (controls.UI_UP_P) {
 			changeSelection(-1);
 		}
@@ -186,6 +197,7 @@ class OptionsState extends MusicBeatState
 				selectorRight.x = item.x + item.width + 15;
 				selectorRight.y = item.y;
 			}
+			camFollow.setPosition(item.x, item.y - bullShit);
 		}
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 	}
