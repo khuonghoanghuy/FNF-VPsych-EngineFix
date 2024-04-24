@@ -3130,11 +3130,16 @@ class FunkinLua {
 	}
 
 	function cameraFromString(cam:String):FlxCamera {
-		switch(cam.toLowerCase()) {
-			case 'camhud' | 'hud': return PlayState.instance.camHUD;
-			case 'camother' | 'other': return PlayState.instance.camOther;
+		var cams:FlxCamera = PlayState.instance.camGame;
+		if (PlayState.instance.modchartCameras.exists(cam)) {
+			cams = PlayState.instance.modchartCameras.get(cam);
+		} else {
+			switch(cam.toLowerCase()) {
+				case 'camhud' | 'hud': return cams = PlayState.instance.camHUD;
+				case 'camother' | 'other': return cams = PlayState.instance.camOther;
+			}	
 		}
-		return PlayState.instance.camGame;
+		return cams;
 	}
 
 	public function luaTrace(text:String, ignoreCheck:Bool = false, deprecated:Bool = false, color:FlxColor = FlxColor.WHITE) {
