@@ -40,6 +40,8 @@ class Main extends Sprite
 		startFullscreen: true // if the game should start at fullscreen mode
 	};
 
+	public static var isDev:String = "DEVELOPMENT BUILD"; // using For MainMenuState.hx
+
 	public static var fpsVar:FPS;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
