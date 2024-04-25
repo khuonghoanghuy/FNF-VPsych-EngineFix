@@ -101,7 +101,7 @@ class OptionsState extends MusicBeatState
 
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
-		bg.cameras = [camOptions]
+		bg.cameras = [camOptions];
 		add(bg);
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
