@@ -24,18 +24,12 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
-import flixel.FlxObject;
 import Controls;
-import flixel.FlxCamera;
 
 using StringTools;
 
 class OptionsState extends MusicBeatState
 {
-	var camFollow:FlxObject;
-	var camFollowPos:FlxObject;
-	var camOptions:FlxCamera;
-
 	var options:Array<String> = ['Note Colors', 'Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
@@ -84,24 +78,12 @@ class OptionsState extends MusicBeatState
 		DiscordClient.changePresence("Options Menu", null);
 		#end
 
-		camOptions = new FlxCamera();
-		camOptions.bgColor.alpha = 0;
-		FlxG.cameras.add(camOptions, false);
-
-		camFollow = new FlxObject(0, 0, 1, 1);
-		camFollowPos = new FlxObject(0, 0, 1, 1);
-		add(camFollow);
-		add(camFollowPos);
-
-		FlxG.camera.follow(camFollowPos, null, 1);
-
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
 		bg.updateHitbox();
 
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
-		bg.cameras = [camOptions];
 		add(bg);
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
@@ -111,7 +93,6 @@ class OptionsState extends MusicBeatState
 		{
 			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
 			optionText.screenCenter();
-			optionText.cameras = [camOptions];
 			optionText.y += (100 * (i - (options.length / 2))) + 50;
 			grpOptions.add(optionText);
 		}
@@ -129,13 +110,11 @@ class OptionsState extends MusicBeatState
 		tipText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		tipText.borderSize = 2;
 		tipText.scrollFactor.set();
-		tipText.cameras = [camOptions];
 		add(tipText);
 		var tipText:FlxText = new FlxText(10, 32, 0, 'Press Y to Go In Hitbox Settings Menu', 16);
 		tipText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		tipText.borderSize = 2;
 		tipText.scrollFactor.set();
-		tipText.cameras = [camOptions];
 		add(tipText);
 		#end
 
@@ -156,9 +135,6 @@ class OptionsState extends MusicBeatState
 
 	override function update(elapsed:Float) {
 		super.update(elapsed);
-
-		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
-		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
 		if (controls.UI_UP_P) {
 			changeSelection(-1);
@@ -203,17 +179,12 @@ class OptionsState extends MusicBeatState
 			bullShit++;
 
 			item.alpha = 0.6;
-			var add:Float = 0;
 			if (item.targetY == 0) {
 				item.alpha = 1;
 				selectorLeft.x = item.x - 63;
 				selectorLeft.y = item.y;
 				selectorRight.x = item.x + item.width + 15;
-				if(item.length > 4) {
-					add = item.length * 8;
-				}
 				selectorRight.y = item.y;
-				camFollow.setPosition(item.x, item.y - add);
 			}
 		}
 		FlxG.sound.play(Paths.sound('scrollMenu'));
