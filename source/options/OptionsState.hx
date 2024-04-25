@@ -30,7 +30,9 @@ using StringTools;
 
 class OptionsState extends MusicBeatState
 {
+	var mainOpt:Array<String> = [];
 	var options:Array<String> = ['Note Colors', 'Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay'];
+	var options2:Array<String> = ['Botplay'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
@@ -73,6 +75,8 @@ class OptionsState extends MusicBeatState
 	override function create() {
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
+
+		mainOpt = options; // default
 
 		#if desktop
 		DiscordClient.changePresence("Options Menu", null);
@@ -136,6 +140,24 @@ class OptionsState extends MusicBeatState
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
+		if (controls.UI_LEFT_P) {
+			if (mainOpt == options) {
+				mainOpt = options2;
+				regenMenu();
+			} else if (mainOpt == options2) {
+				mainOpt = options;
+			}
+		}
+
+		if (controls.UI_RIGHT_P {
+		    if (mainOpt == options) {
+				mainOpt = options2;
+				regenMenu();
+			} else if (mainOpt == options2) {
+				mainOpt = options;
+			}
+		}
+		
 		if (controls.UI_UP_P) {
 			changeSelection(-1);
 		}
@@ -188,5 +210,26 @@ class OptionsState extends MusicBeatState
 			}
 		}
 		FlxG.sound.play(Paths.sound('scrollMenu'));
+	}
+
+	function regenMenu()
+	{
+		for (i in 0...grpOptions.members.length) {
+			var obj = grpOptions.members[0];
+			obj.kill();
+			grpOptions.remove(obj, true);
+			obj.destroy();
+		}
+
+		for (i in 0...options.length)
+		{
+			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
+			optionText.screenCenter();
+			optionText.y += (100 * (i - (options.length / 2))) + 50;
+			grpOptions.add(optionText);
+		}
+
+		curSelected = 0;
+		changeSelection();
 	}
 }
