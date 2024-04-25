@@ -12,6 +12,7 @@ import openfl.display._internal.stats.DrawCallContext;
 #if flash
 import openfl.Lib;
 #end
+import flixel.system.FlxAssets;
 
 #if openfl
 import openfl.system.System;
@@ -47,7 +48,7 @@ class FPS extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat("_sans", 12, color);
+		defaultTextFormat = new TextFormat(FlxAssets.FONT_DEBUGGER, 15, color);
 		autoSize = LEFT;
 		multiline = true;
 		text = "FPS: ";
