@@ -4169,13 +4169,24 @@ class PlayState extends MusicBeatState
 			spawnNoteSplashOnNote(note);
 		}
 
-		if(!practiceMode && !cpuControlled) {
-			songScore += score;
-			if(!note.ratingDisabled)
-			{
-				songHits++;
-				totalPlayed++;
-				RecalculateRating(false);
+		if(!practiceMode) {
+			if (ClientPrefs.forceAddScore && cpuControlled) {
+				songScore += score;
+				if(!note.ratingDisabled)
+				{
+					songHits++;
+					totalPlayed++;
+					RecalculateRating(false);
+				}					
+			}
+			else if (!cpuControlled) {
+				songScore += score;
+				if(!note.ratingDisabled)
+				{
+					songHits++;
+					totalPlayed++;
+					RecalculateRating(false);
+				}	
 			}
 		}
 
