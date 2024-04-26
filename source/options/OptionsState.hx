@@ -133,7 +133,7 @@ class OptionsState extends MusicBeatState
 		#if android
 		addVirtualPad(FULL, A_B_X_Y);
 		#end
-
+		
 		super.create();
 	}
 
@@ -142,27 +142,25 @@ class OptionsState extends MusicBeatState
 		ClientPrefs.saveSettings();
 	}
 
+	var curMenu:Int = 0;
+
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
 		if (controls.UI_LEFT_P) {
-			if (mainOpt == options) {
-				mainOpt = options2;
-				regenMenu();
-			} else if (mainOpt == options2) {
-				mainOpt = options;
-				regenMenu();
+			curMenu--;
+			if (curMenu == -1) {
+				curMenu = 1;
+				remakeMenu(curMenu);
 			}
 		}
 
 		if (controls.UI_RIGHT_P) {
-		    if (mainOpt == options) {
-				mainOpt = options2;
-				regenMenu();
-			} else if (mainOpt == options2) {
-				mainOpt = options;
-				regenMenu();
-			}
+			curMenu++;
+		    if (curMenu == 2) {
+				curMenu = 0;
+				remakeMenu(curMenu);
+		    }
 		}
 		
 		if (controls.UI_UP_P) {
@@ -217,6 +215,19 @@ class OptionsState extends MusicBeatState
 			}
 		}
 		FlxG.sound.play(Paths.sound('scrollMenu'));
+	}
+
+	function remakeMenu(curMenu:Int = 0) {
+		switch (curMenu)
+		{
+				case 0: // default
+				  mainOpt = options;
+				case 1:
+				  mainOpt = options2;
+				default: // prevent missing
+				  mainOpt = options;
+		}
+		regenMenu();
 	}
 
 	function regenMenu()
