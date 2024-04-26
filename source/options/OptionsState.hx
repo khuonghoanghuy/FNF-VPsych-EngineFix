@@ -151,15 +151,17 @@ class OptionsState extends MusicBeatState
 				regenMenu();
 			} else if (mainOpt == options2) {
 				mainOpt = options;
+				regenMenu();
 			}
 		}
 
-		if (controls.UI_RIGHT_P {
+		if (controls.UI_RIGHT_P) {
 		    if (mainOpt == options) {
 				mainOpt = options2;
 				regenMenu();
 			} else if (mainOpt == options2) {
 				mainOpt = options;
+				regenMenu();
 			}
 		}
 		
