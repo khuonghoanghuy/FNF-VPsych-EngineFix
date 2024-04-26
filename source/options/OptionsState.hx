@@ -149,7 +149,7 @@ class OptionsState extends MusicBeatState
 
 		if (controls.UI_LEFT_P) {
 			curMenu--;
-			if (curMenu == -1) {
+			if (curMenu < 0) {
 				curMenu = 1;
 				remakeMenu(curMenu);
 			}
@@ -157,7 +157,7 @@ class OptionsState extends MusicBeatState
 
 		if (controls.UI_RIGHT_P) {
 			curMenu++;
-		    if (curMenu == 2) {
+		    if (curMenu > 1) {
 				curMenu = 0;
 				remakeMenu(curMenu);
 		    }
@@ -227,6 +227,8 @@ class OptionsState extends MusicBeatState
 				default: // prevent missing
 				  mainOpt = options;
 		}
+		
+		FlxG.sound.play(Paths.sound('scrollMenu'));
 		regenMenu();
 	}
 
