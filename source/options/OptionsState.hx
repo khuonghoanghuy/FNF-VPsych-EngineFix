@@ -64,6 +64,11 @@ class OptionsState extends MusicBeatState
 				removeVirtualPad();
 				#end
 				openSubState(new options.GameplaySettingsSubState());
+			case 'Botplay':
+				#if android
+				removeVirtualPad();
+				#end
+				openSubState(new options.BotplaySettingSubState());
 			case 'Adjust Delay and Combo':
 				LoadingState.loadAndSwitchState(new options.NoteOffsetState());
 		}
