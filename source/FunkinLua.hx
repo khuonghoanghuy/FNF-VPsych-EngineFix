@@ -3440,7 +3440,10 @@ class HScript
 		interp.variables.set('ShaderFilter', openfl.filters.ShaderFilter);
 		interp.variables.set('StringTools', StringTools);
         interp.variables.set("Std", Std);
-
+		
+		interp.variables.set("addClassAsVar", function (name:String, classes:String){
+			return interp.variables.set(name, Type.resolveClass(classes);
+		});
 		interp.variables.set('setVar', function(name:String, value:Dynamic)
 		{
 			PlayState.instance.variables.set(name, value);
