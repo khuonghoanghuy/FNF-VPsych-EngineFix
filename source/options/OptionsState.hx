@@ -146,21 +146,13 @@ class OptionsState extends MusicBeatState
 
 	override function update(elapsed:Float) {
 		super.update(elapsed);
+		regenMemu(); // try always update
 
-		if (controls.UI_LEFT_P) {
-			curMenu--;
-			if (curMenu < 0) {
-				curMenu = 1;
-				remakeMenu(curMenu);
-			}
-		}
-
-		if (controls.UI_RIGHT_P) {
-			curMenu++;
-		    if (curMenu > 1) {
-				curMenu = 0;
-				remakeMenu(curMenu);
-		    }
+		if (controls.UI_LEFT_R || controls.UI_RIGHT_R) {
+			if (mainOpt == options2)
+				mainOpt = options;
+			else
+				mainOpt = options2;
 		}
 		
 		if (controls.UI_UP_P) {
