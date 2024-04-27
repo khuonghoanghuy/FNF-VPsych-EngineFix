@@ -3442,7 +3442,7 @@ class HScript
         interp.variables.set("Std", Std);
 		
 		interp.variables.set("addClassAsVar", function (name:String, classes:String){
-			interp.variables.set(name, Type.resolveClass(classes);
+			interp.variables.set(name, Type.resolveClass(classes));
 			return;
 		});
 		interp.variables.set('setVar', function(name:String, value:Dynamic)
