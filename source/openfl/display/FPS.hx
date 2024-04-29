@@ -48,7 +48,7 @@ class FPS extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat(FlxAssets.FONT_DEBUGGER, 15, color);
+		defaultTextFormat = new TextFormat(FlxAssets.FONT_DEBUGGER, 16, color);
 		autoSize = LEFT;
 		multiline = true;
 		text = "FPS: ";
