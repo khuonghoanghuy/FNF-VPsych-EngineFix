@@ -160,12 +160,14 @@ class OptionsState extends MusicBeatState
 		
 		if (controls.UI_LEFT_R) {
 			curMenu--;
-			regenMenu();
+			// regenMenu();
+			remakeMenu(curMenu);
 		}
 
 		if (controls.UI_RIGHT_R) {
 			curMenu++;
-			regenMenu();
+			// regenMenu();
+			remakeMenu(curMenu);
 		}		
 		
 		if (controls.UI_UP_P) {
